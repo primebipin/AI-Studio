@@ -1,49 +1,48 @@
 import React, { useState } from 'react';
-import './textForm.css'
+import './textForm.css';
 
-function TextForm() {
-  const [text, setText] = useState('');   // State for the input text
-  const [loading, setLoading] = useState(false);  // State for the loading status
+function TextForm({ setText }) {
+  const [inputText, setInputText] = useState('');
+  const [correctLoading, setCorrectLoading] = useState(false);
+  const [explainLoading, setExplainLoading] = useState(false);
+  const [codeLoading, setCodeLoading] = useState(false);
+  const [summaryLoading, setSummaryLoading] = useState(false);
 
-  // Handle changes in the text area
   const handleOnChange = (event) => {
-    setText(event.target.value);
+    setInputText(event.target.value);
   };
 
-  // Function to send the text to the server and get the corrected text
-  const handleFormatText = async () => {
-    setLoading(true);  // Set loading to true when the request is sent
+  // Function to handle the format text request based on button action
+  const handleFormatText = async (action) => {
+    // Set the appropriate loading state based on action
+    const setLoading = (state) => {
+      if (action === 'Correct Text') setCorrectLoading(state);
+      if (action === 'Explain') setExplainLoading(state);
+      if (action === 'Get Code') setCodeLoading(state);
+      if (action === 'Get Summary') setSummaryLoading(state);
+    };
+
+    setLoading(true);
     try {
-      // const response = await axios.post('http://localhost:5000/api/format-text',{text: text});
-
       const response = await fetch('http://localhost:5000/api/format-text', {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",  // Specify content type
-        },
-        body: JSON.stringify({ text: text }),
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text: inputText, action }),
       });
-      
+
       const data = await response.json();
-      console.log("data is :: ", data);
+      const generatedText = data.generatedText;
 
-      // Log the entire response to see the structure
-      console.log('API Response:');
-
-      // Access the corrected text from the response
-      const corrected = data.correctedText;
-
-      if (corrected) {
-        setText(corrected);  // Update the text area with the corrected text
+      if (generatedText) {
+        setText(generatedText);
       } else {
-        console.error('No corrected text returned');
-        alert('No corrected text returned from the server.');
+        console.error('No text returned');
+        alert('No text returned from the server.');
       }
     } catch (error) {
-      console.error('Error communicating with server:::::', error.message);
-      // alert('An error occurred while formatting the text.');
+      console.error('Error:', error.message);
     } finally {
-      setLoading(false);  // Reset loading state
+      setLoading(false);
     }
   };
 
@@ -51,19 +50,43 @@ function TextForm() {
     <div>
       <textarea
         className="textBox"
-        value={text}
+        value={inputText}
         onChange={handleOnChange}
         rows="8"
         placeholder="Type your text here..."
       ></textarea>
 
-      {/* Button to trigger text correction */}
+      {/* Each button has its own loading state */}
       <button
-        className="btn btn-primary my-3"
-        onClick={handleFormatText}
-        disabled={loading}  // Disable button while loading
+        className="btn"
+        onClick={() => handleFormatText('Correct Text')}
+        disabled={correctLoading}
       >
-        {loading ? 'Correcting...' : 'Correct Text'}
+        {correctLoading ? 'Correcting...' : 'Correct Text'}
+      </button>
+
+      <button
+        className="btn"
+        onClick={() => handleFormatText('Explain')}
+        disabled={explainLoading}
+      >
+        {explainLoading ? 'Explaining...' : 'Explain'}
+      </button>
+
+      <button
+        className="btn"
+        onClick={() => handleFormatText('Get Code')}
+        disabled={codeLoading}
+      >
+        {codeLoading ? 'Generating Code...' : 'Get Code'}
+      </button>
+
+      <button
+        className="btn"
+        onClick={() => handleFormatText('Get Summary')}
+        disabled={summaryLoading}
+      >
+        {summaryLoading ? 'Summarizing...' : 'Get Summary'}
       </button>
     </div>
   );

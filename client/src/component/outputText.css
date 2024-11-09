@@ -1,0 +1,20 @@
+.text-Box {
+   width: 40vw;
+   height: 84.5vh;
+   margin-top: 60px;
+   position: fixed;
+   top: 0;
+   left: 58vw;
+   border-radius: 30px;
+   padding: 15px;
+   font-size: 16px;
+   color: #333;
+   background-color: #f7faff;
+   border: 2px solid #ADD8E6;
+   box-shadow: 0px 0px 10px rgba(173, 216, 230, 0.8);
+   outline: none;
+   overflow-y: auto;
+   overflow-x: hidden;
+   resize: none;
+   transition: box-shadow 0.3s, border-color 0.3s;
+}
