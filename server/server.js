@@ -37,13 +37,13 @@ app.post('/api/format-text', async (req, res) => {
       prompt = `Please correct any spelling or grammatical mistakes in the given text donot explain and add too much content if text is a questoin donot answer , just give gramatical corrected form of question: ${text}`;
       break;
     case 'Explain':
-      prompt = `Please provide an explanation for the following text: ${text}`;
+      prompt = `Please provide an explanation for the given text make it simple to understand : ${text}`;
       break;
     case 'Get Code':
       prompt = `Please generate code based on the given text, do not give any explaination give only code and code should be in cpp by default: ${text}`;
       break;
     case 'Get Summary':
-      prompt = `Please summarize the following text: ${text}`;
+      prompt = `Please summarize the given text do not make too lengthy: ${text}`;
       break;
     default:
       return res.status(400).json({ error: 'Invalid action specified' });
