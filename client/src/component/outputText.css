@@ -1,3 +1,5 @@
+/* outputText.css */
+
 .text-Box {
    width: 40vw;
    height: 84.5vh;
@@ -17,4 +19,17 @@
    overflow-x: hidden;
    resize: none;
    transition: box-shadow 0.3s, border-color 0.3s;
-}
+ }
+ 
+ @media (max-width: 768px) {
+   .text-Box {
+     width: 90vw;
+     height: 45vh;
+     margin-top: 10px;
+     left: 50%;
+     top: auto;
+     transform: translateX(-50%);
+     position: relative;
+   }
+ }
+ 
