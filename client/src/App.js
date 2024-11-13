@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 import TextForm from './component/TextForm';
 import OutputText from './component/outputText.js';
+import FormattedOutput from './component/formateText.js';
 
 function App() {
   const [text, setText] = useState(''); // Holds corrected text for OutputText
@@ -13,6 +14,7 @@ function App() {
       </header>
       <div className="container">
         <TextForm setText={setText} />  {/* Pass setText to update corrected text */}
+        <FormattedOutput text={text}/>
         <OutputText text={text} />       {/* Display corrected text in OutputText */}
       </div>
     </div>
