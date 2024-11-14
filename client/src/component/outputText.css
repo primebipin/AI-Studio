@@ -1,35 +1,96 @@
-/* outputText.css */
-
 .text-Box {
-   width: 40vw;
-   height: 84.5vh;
-   margin-top: 60px;
-   position: fixed;
-   top: 0;
-   left: 58vw;
-   border-radius: 30px;
-   padding: 15px;
-   font-size: 16px;
-   color: #333;
-   background-color: #f7faff;
-   border: 2px solid #ADD8E6;
-   box-shadow: 0px 0px 10px rgba(173, 216, 230, 0.8);
-   outline: none;
-   overflow-y: auto;
-   overflow-x: hidden;
-   resize: none;
-   transition: box-shadow 0.3s, border-color 0.3s;
- }
- 
- @media (max-width: 768px) {
-   .text-Box {
-     width: 90vw;
-     height: 45vh;
-     margin-top: 10px;
-     left: 50%;
-     top: auto;
-     transform: translateX(-50%);
-     position: relative;
-   }
- }
- 
+  width: 40vw;
+  height: 84.5vh;
+  position: fixed; /* Fixed position for large screens */
+  top: 60px;       /* Distance from the top of the viewport */
+  right: 2vw;      /* Distance from the right side of the viewport */
+  border-radius: 30px;
+  padding: 15px;
+  font-size: 16px;
+  color: #333;
+  background-color: #f7faff;
+  border: 2px solid #ADD8E6;
+  box-shadow: 0px 0px 10px rgba(173, 216, 230, 0.8);
+  outline: none;
+  overflow-y: auto; /* Enable vertical scrolling */
+  overflow-x: hidden;
+  transition: box-shadow 0.3s, border-color 0.3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Align content at the top */
+}
+
+.placeholder {
+  color: #aaa;
+}
+
+.markdown-content {
+  padding: 10px; /* Adds space inside the text box */
+  flex-grow: 1;  /* Allow this section to grow and fill the space */
+  overflow-y: auto; /* Enable scrolling for content */
+}
+
+/* Button styling */
+.button {
+  position: absolute; /* Position relative to the .text-Box */
+  background: transparent;
+  border-color: #aaa;
+  border-radius: 2px;
+  border-width: 1.5px;
+  cursor: pointer;
+  color: rgb(75, 85, 176);
+  padding: 4px 10px;
+  font-size: 14px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Copy button in the top-right corner */
+.copy-button {
+  top: 10px;
+  right: 10px;
+}
+
+/* Clear button in the bottom-right corner */
+.clear-button {
+  bottom: 10px;
+  right: 10px;
+}
+
+/* Hover effect for buttons */
+.button:hover {
+  background-color: #ADD8E6;
+  color: #fff;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+  /* Remove fixed position for smaller screens */
+  .text-Box {
+    position: relative;  /* Allow the text box to be part of the page flow */
+    width: 90vw;
+             /* Make it fill most of the screen width */
+    height: 18rem;        /* Allow height to adjust as needed */
+    margin-top: 10px;    /* Add margin from top */
+    left: 0;             /* Align it with the left edge */
+    right: 0;            /* Align it with the right edge */
+    margin-left: 5vw;    /* Center it horizontally */
+    margin-right: 5vw;   /* Center it horizontally */
+    padding: 20px;
+  }
+
+  /* Adjust button size and position */
+  .button {
+    font-size: 12px;
+    padding: 4px 6px;
+  }
+  
+  .copy-button {
+    top: 8px;
+    right: 8px;
+  }
+
+  .clear-button {
+    bottom: 8px;
+    right: 8px;
+  }
+}
