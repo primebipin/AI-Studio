@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useRef,useEffect } from 'react';
 import './textForm.css';
 
 function TextForm({ setText }) {
@@ -7,6 +7,20 @@ function TextForm({ setText }) {
   const [explainLoading, setExplainLoading] = useState(false);
   const [codeLoading, setCodeLoading] = useState(false);
   const [summaryLoading, setSummaryLoading] = useState(false);
+  const [searchLoading, setSearchLoading] = useState(false);
+
+  const buttonRef = useRef(null);
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === 'Enter' && !searchLoading) {
+        buttonRef.current.click();
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [searchLoading]);
 
   const handleOnChange = (event) => {
     setInputText(event.target.value);
@@ -16,6 +30,7 @@ function TextForm({ setText }) {
   const handleFormatText = async (action) => {
     // Set the appropriate loading state based on action
     const setLoading = (state) => {
+      if (action === 'Search') setSearchLoading(state);
       if (action === 'Correct Text') setCorrectLoading(state);
       if (action === 'Explain') setExplainLoading(state);
       if (action === 'Get Code') setCodeLoading(state);
@@ -57,6 +72,15 @@ function TextForm({ setText }) {
       ></textarea>
 
       {/* Each button has its own loading state */}
+      <button
+        className="btn"
+        onClick={() => handleFormatText('Search')}
+        disabled={searchLoading}
+        ref={buttonRef}
+      >
+        {searchLoading ? 'Searching...' : 'Search'}
+
+      </button>
       <button
         className="btn"
         onClick={() => handleFormatText('Correct Text')}

@@ -3,7 +3,7 @@
   height: 84.5vh;
   position: fixed; /* Fixed position for large screens */
   top: 60px;       /* Distance from the top of the viewport */
-  right: 2vw;      /* Distance from the right side of the viewport */
+  right: 2vw;      
   border-radius: 30px;
   padding: 15px;
   font-size: 16px;
@@ -25,7 +25,8 @@
 }
 
 .markdown-content {
-  padding: 10px; /* Adds space inside the text box */
+  padding: 20px; 
+  /* row-gap: 20px; */
   flex-grow: 1;  /* Allow this section to grow and fill the space */
   overflow-y: auto; /* Enable scrolling for content */
 }
@@ -68,7 +69,7 @@
   .text-Box {
     position: relative;  /* Allow the text box to be part of the page flow */
     width: 90vw;
-             /* Make it fill most of the screen width */
+              /* Make it fill most of the screen width */
     height: 18rem;        /* Allow height to adjust as needed */
     margin-top: 10px;    /* Add margin from top */
     left: 0;             /* Align it with the left edge */

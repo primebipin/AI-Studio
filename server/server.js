@@ -33,6 +33,9 @@ app.post('/api/format-text', async (req, res) => {
   // Define prompts based on the action
   let prompt;
   switch (action) {
+    case 'Search':
+      prompt = `${text}`;
+      break;
     case 'Correct Text':
       prompt = `Please correct any spelling or grammatical mistakes in the given text donot explain and add too much content if text is a questoin donot answer , just give gramatical corrected form of question: ${text}`;
       break;
@@ -40,7 +43,7 @@ app.post('/api/format-text', async (req, res) => {
       prompt = `Please provide an explanation for the given text make it simple to understand : ${text}`;
       break;
     case 'Get Code':
-      prompt = `Please generate code based on the given text, do not give any explaination give only code and code should be in cpp by default: ${text}`;
+      prompt = `Please generate code based on the given text, do not give any explaination give only code and code should be in cpp by default  : ${text}`;
       break;
     case 'Get Summary':
       prompt = `Please summarize the given text do not make too lengthy: ${text}`;
